@@ -1,0 +1,48 @@
+1. User registration Flow 
+    -   Invite Collection
+    -   User Collection
+    a.  create user api:
+            api:
+                endpoint/url: users/
+                method: POST
+                payload: {
+                    name: "Shrenik Mensinkai",
+                    email: "shrenik.mensinkai@gmail.com"
+                }   
+            logic:
+                - check if user(user collection) exist in user collection with email? delete old object, create new with recent payload, set active false : create new with recent payload , set active false;
+                - check if old invite(invite collection) exist with email? delete old, create new invite, set expire with ttl index: create new invite, set expire with ttl index;
+                - generate url link with the invite_id and frontend password page url;
+                - trigger email to the user email id with above generated email.
+    
+    handel bars for email template
+    
+    b.  register user api:
+            api:   
+                endpoint/ url: users/register
+                method: POST
+                payload:{
+                    invite_id:(mongo_id)
+                    password:"mensinkai"
+                }
+            logic:
+                - check object in invite collection with invite_id? get the email form the object, hash password, set user password and active true in user collection, delete invite: throw invalid invite_id error;  
+
+2. User Login flow
+    -   User Collection
+    a.  login api:
+        api: 
+            endpoint/ url: users/login
+            method: POST
+            payload: {
+                email: "shrenik.mensinkai@gmail.com",
+                password: "mensinkai"
+            }
+        logic:
+            -   check for object in user collection with email, active:true, password ?
+                    - check if password matching 
+                        - generate JWT token, send user details and token as res.
+                if any condition fails send email/password invalid as res;
+                
+
+              
