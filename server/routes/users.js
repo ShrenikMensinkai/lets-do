@@ -34,7 +34,7 @@ router.post('/', validator.body(createUserBodySchema), function(req, res, next) 
   })
 });
 
-router.post('/register', validator.body(registerUserBodySchema), function(req, res, next) {
+router.post('/registration', validator.body(registerUserBodySchema), function(req, res, next) {
   const { invite_id, password } = req.body;
   let action = new RegisterUser({ invite_id, password});
   ActionManager.execute(action)

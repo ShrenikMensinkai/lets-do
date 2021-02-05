@@ -11,7 +11,7 @@ class UserRepository{
             let result = await User.create(userObj);
             return result.toObject();
         }catch(error) {
-            throw new httperror(400, "Email is already registered"); 
+            throw new httperror(error.status||400, "Email is already registered"); 
         }
     }
 
@@ -20,7 +20,7 @@ class UserRepository{
             let result = await User.deleteOne({email, is_active:false});
             return result
         }catch(error) {
-            throw error;
+            throw new httperror(error.status||400, error.message||"Email is already registered"); 
         }
     }
 
@@ -29,7 +29,7 @@ class UserRepository{
             let result = await User.findOneAndUpdate({email,is_active:false},{is_active:true, password: password},{new:true}).lean();
             return result
         }catch(error) {
-            throw error;
+            throw new httperror(error.status||400, error.message||"Email is already registered"); 
         }
     }
 
@@ -38,13 +38,9 @@ class UserRepository{
             let result = await User.findOne({email,is_active:true}).lean();
             return result
         }catch(error) {
-            throw error;
+            throw new httperror(error.status||400, error.message||"Email is already registered"); 
         }
     }
-
-    
-
-
 }
 
 exports.UserRepository = UserRepository;

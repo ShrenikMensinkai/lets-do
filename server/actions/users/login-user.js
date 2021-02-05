@@ -36,7 +36,7 @@ class LoginUser{
                 email : user.email,
             });
         } catch (error) {
-            throw new httperror(error.status, error.message); 
+            throw new httperror(error.status||500, error.message||"Internal server error"); 
         }
     }
 }

@@ -10,7 +10,7 @@ class InviteRepository{
             let result = await Invite.create(inviteObj);
             return result.toObject();
         }catch(error) {
-            throw error;
+            throw new httperror(error.status||500, error.message||"Internal server error"); 
         }
     }
 
@@ -21,7 +21,7 @@ class InviteRepository{
             let result = await Invite.deleteOne(inviteObj);
             return result
         }catch(error) {
-            throw error;
+            throw new httperror(error.status||500, error.message||"Internal server error"); 
         }
     }
 
@@ -32,7 +32,7 @@ class InviteRepository{
             let result = await Invite.findOne(inviteId).lean();
             return result
         }catch(error) {
-            throw error;
+            throw new httperror(error.status||500, error.message||"Internal server error"); 
         }
     }
 

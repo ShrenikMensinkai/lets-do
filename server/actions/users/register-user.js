@@ -22,7 +22,7 @@ class RegisterUser{
             await inviteRepository.deleteInviteByEmailId({email:invite.email});
             return result;
         } catch (error) {
-            throw new httperror(error.status, error.message); 
+            throw new httperror(error.status||500, error.message||"Internal server error");  
         }
     }
     createInviteLink({invite_id}){

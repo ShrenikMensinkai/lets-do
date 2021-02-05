@@ -7,6 +7,6 @@ const InviteSchema = new Schema({
   email       : { type: String, unique: true, require: true, index: true},
   },{ timestamps: { createdAt: 'created_at',updatedAt: 'updated_at' }});
   
-  InviteSchema.index({created_at: 1},{expireAfterSeconds: 3600});
+  InviteSchema.index({created_at: 1},{expireAfterSeconds: 3600});// Invite expires after 1hr
 
 exports.Invite = mongoose.model('invites', InviteSchema,'invites')
