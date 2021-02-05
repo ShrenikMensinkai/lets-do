@@ -26,12 +26,25 @@ class UserRepository{
 
     async updateUser({email, password}){
         try{
-            let result = await User.findOneAndUpdate({email},{is_active:true, password: password},{new:true}).lean();
+            let result = await User.findOneAndUpdate({email,is_active:false},{is_active:true, password: password},{new:true}).lean();
             return result
         }catch(error) {
             throw error;
         }
     }
+
+    async getUserByEmail({email}){
+        try{
+            let result = await User.findOne({email,is_active:true}).lean();
+            return result
+        }catch(error) {
+            throw error;
+        }
+    }
+
+    
+
+
 }
 
 exports.UserRepository = UserRepository;
