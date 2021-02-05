@@ -4,7 +4,7 @@ class Email{
     async sendRegistrationMail(mailId, inviteLink){
         try{
             let email = mailId.trim();
-            sgMail.setApiKey('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');
+            sgMail.setApiKey(process.env.EMAIL_STRING);
             let msg = {
                 to: email,
                 from: 'shrenik.msk@gmail.com',
