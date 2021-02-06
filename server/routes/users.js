@@ -28,9 +28,13 @@ router.post('/', validator.body(createUserBodySchema), function(req, res, next) 
   let action = new CreateUser({ name, email});
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+      res.status(201).send({
+        data: result  
+      })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 
@@ -39,9 +43,13 @@ router.post('/registration', validator.body(registerUserBodySchema), function(re
   let action = new RegisterUser({ invite_id, password});
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+      res.status(200).send({
+        data: result  
+      })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 
@@ -50,9 +58,13 @@ router.post('/login', validator.body(loginUserBodySchema), function(req, res, ne
   let action = new LoginUser({ email, password});
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+    res.status(200).send({
+      data: result  
+    })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 

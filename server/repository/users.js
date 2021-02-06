@@ -11,7 +11,7 @@ class UserRepository{
             let result = await User.create(userObj);
             return result.toObject();
         }catch(error) {
-            throw new httperror(error.status||400, "Email is already registered"); 
+            throw new httperror(error.status||400, error.message||"Email is already registered"); 
         }
     }
 
@@ -26,8 +26,8 @@ class UserRepository{
 
     async updateUser({email, password}){
         try{
-            let result = await User.findOneAndUpdate({email,is_active:false},{is_active:true, password: password},{new:true}).lean();
-            return result
+            let result = await User.findOneAndUpdate({email,is_active:false},{$set:{is_active:true, password: password}},{new:true}).lean();
+            return result;
         }catch(error) {
             throw new httperror(error.status||400, error.message||"Email is already registered"); 
         }

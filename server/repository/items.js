@@ -35,7 +35,7 @@ class ItemsRepository{
                 _id: item_id,
                 created_by: user_id 
             };
-            let result = await Item.findOneAndUpdate(itemQuery,{$set:update_obj},{'new':true}).lean();
+            let result = await Item.findOneAndUpdate(itemQuery,{$set:update_obj},{new:true}).lean();
             if(!result)
                 throw new httperror(400, "Item not found"); 
             return result;

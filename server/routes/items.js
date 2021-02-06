@@ -25,9 +25,13 @@ router.post('/', authenticate, validator.body(createItemBodySchema), function(re
   let action = new CreateItem({ title, user_id});
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+    res.status(201).send({
+      data: result  
+    })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 
@@ -37,9 +41,13 @@ router.get('/:item_id?', authenticate, function(req, res, next) {
   let action = new GetItem({ item_id, user_id});
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+    res.status(200).send({
+      data: result  
+    })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 
@@ -50,9 +58,13 @@ router.patch('/:item_id', authenticate, validator.body(updateItemBodySchema), fu
   let action = new UpdateItem({ item_id, user_id, update_obj} );
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+    res.status(200).send({
+      data: result  
+    })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 
@@ -62,9 +74,13 @@ router.delete('/:item_id', authenticate, function(req, res, next) {
   let action = new DeleteItem({ item_id, user_id} );
   ActionManager.execute(action)
   .then(result => {
-      res.send(result)
+    res.status(200).send({
+      data: result  
+    })
   }).catch((err)=>{
-      res.status(err.status || 400).send(err.message);
+      res.status(err.status || 400).send({
+        data:err.message||'Bad request'
+      });
   })
 });
 

@@ -19,8 +19,7 @@ class CreateUser{
             await inviteRepository.deleteInviteByEmailId({email:this.email});
             let invite = await inviteRepository.createInvite({email:this.email});
             let inviteLink = this.createInviteLink({invite_id:invite._id});
-            
-            // await emailObj.sendRegistrationMail(user.email,inviteLink);
+            await emailObj.sendRegistrationMail(user.email,inviteLink);
             user.id = user._id;
             delete user._id;
             delete user.__v;

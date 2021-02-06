@@ -18,17 +18,22 @@ class RegisterUser{
                 throw new httperror(400, "Invite not found");    
             }
             this.password = bcrypt.hashSync(this.password, 8);
-            let result = userRepository.updateUser({email:invite.email, password: this.password});
+            let user = await userRepository.updateUser({email:invite.email, password: this.password});
             await inviteRepository.deleteInviteByEmailId({email:invite.email});
-            return result;
+            user.id = user._id;
+            delete user._id;
+            delete user.__v;
+            delete user.password;
+            return user;
+            
         } catch (error) {
             throw new httperror(error.status||500, error.message||"Internal server error");  
         }
     }
     createInviteLink({invite_id}){
-       let client_url = `http://localhost:3001/userregistration`;
-       client_url = `${client_url}?invite_id=${invite_id}`;
-       return client_url
+       let client_url = process.env.CLIENT_APP;
+       client_url = `${client_url}userregistration?invite_id=${invite_id}`;
+       return client_url;
     }
    
 }
