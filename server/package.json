@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
     "express": "~4.16.1",
     "express-joi-validation": "^5.0.0",
     "http-errors": "~1.6.3",
