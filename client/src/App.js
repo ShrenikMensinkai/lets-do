@@ -6,6 +6,9 @@ import "./App.css";
 import AddItem from "./components/add-item.component";
 import Item from "./components/item.component";
 import ItemList from "./components/item-list.component";
+import UserRegistration from "./components/user-registration.component";
+import UserLogin from "./components/user-login.component";
+import UserSignup from "./components/user-signup.component";
 
 class App extends Component {
   render() {
@@ -34,6 +37,9 @@ class App extends Component {
             <Route exact path={["/", "/items"]} component={ItemList} />
             <Route exact path="/add" component={AddItem} />
             <Route path="/item/:id" component={Item} />
+            <Route path="/userregistration/:invite_id" component={ UserRegistration } />
+            <Route path="/login" component={UserLogin} />
+            <Route path="/signup" component={UserSignup} />
           </Switch>
         </div>
       </div>

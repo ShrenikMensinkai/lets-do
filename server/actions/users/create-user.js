@@ -29,8 +29,8 @@ class CreateUser{
         }
     }
     createInviteLink({invite_id}){
-       let client_url = `http://localhost:3001/userregistration`;
-       client_url = `${client_url}?invite_id=${invite_id}`;
+       let client_url = `${process.env.CLIENT_APP}/userregistration`;
+       client_url = `${client_url}/${invite_id}`;
        return client_url
     }
    

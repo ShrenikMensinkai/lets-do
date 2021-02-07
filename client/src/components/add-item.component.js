@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ItemDataService from "../services/item.service";
 
-export default class Test extends Component {
+export default class AddItem extends Component {
   constructor(props) {
     super(props);
     this.onChangeItem = this.onChangeItem.bind(this);

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ItemDataService from "../services/item.service";
 import { Link } from "react-router-dom";
 
-export default class TutorialsList extends Component {
+export default class ItemList extends Component {
   constructor(props) {
     super(props);
     this.retrieveItems = this.retrieveItems.bind(this);
