@@ -4,7 +4,7 @@ const httperror = require('http-errors');
 function authenticate(req, res, next) {
     let token = req.headers['token'];
         if (!token){
-            throw new httperror(401, 'Invalid password or email');
+            throw new httperror(401, 'Unauthorized');
         }else{
         try{
             let decoded = jwt.verify(token,process.env.SECRET);

@@ -11,9 +11,11 @@ class GetItem{
         try{
             let itemsRepository = new ItemsRepository(); 
             let item = await itemsRepository.getItem({item_id:this.item_id, user_id:this.user_id});
-            item.item_id = item._id;
-            delete item._id;
-            delete item.__v;
+            if(this.item_id){
+                item = item[0];
+                item.id= item._id;
+                delete item._id;
+            }
             return item;
         } catch (error) {
             throw new httperror(error.status||500, error.message||"Internal server error"); 
