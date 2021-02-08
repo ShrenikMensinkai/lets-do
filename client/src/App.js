@@ -11,9 +11,19 @@ import UserLogin from "./components/user-login.component";
 import UserSignup from "./components/user-signup.component";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.logout = this.logout.bind(this);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    window.location.replace('/login');
+  }  
   render() {
     return (
       <div>
+      { localStorage.getItem('token') !== null ? (
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <a href="/items" className="navbar-brand">
             TODO
@@ -29,12 +39,24 @@ class App extends Component {
                 Add Item
               </Link>
             </li>
+            </div>
+            <div style={{float:'right !important'}}>
+            <li className="nav-item" class="float-right">
+            <button onClick={this.logout} className="btn btn-danger">
+              Logout
+            </button>
+            </li>
           </div>
         </nav>
-
+        ) : (
+          <div>
+            
+          </div>
+        ) }
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/items"]} component={ItemList} />
+            <Route exact path={["/items"]} component={ItemList} />
+            <Route exact path={["/"]} component={UserLogin} />
             <Route exact path="/add" component={AddItem} />
             <Route path="/item/:id" component={Item} />
             <Route path="/userregistration/:invite_id" component={ UserRegistration } />

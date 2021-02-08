@@ -7,6 +7,7 @@ export default class UserLogin extends Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.login = this.login.bind(this);
+    this.onSignUp = this.onSignUp.bind(this);
 
     this.state = {
         email: "",
@@ -26,8 +27,12 @@ export default class UserLogin extends Component {
       this.setState({
         email: email
       });
-
     }
+
+    onSignUp() {
+      this.props.history.push('/signup') 
+    }
+
     login() {
         let data = {
             email:this.state.email,
@@ -35,8 +40,9 @@ export default class UserLogin extends Component {
         };
         UserDataService.userLogin(data)
           .then(response => {
-            console.log(response);
+            localStorage.setItem('token', response.data.data.token);
             this.props.history.push('/items')
+            window.location.reload();
           })
           .catch(e => {
             console.log(e);
@@ -73,6 +79,9 @@ export default class UserLogin extends Component {
             </form>
             <button onClick={this.login} className="btn btn-success">
               Login
+            </button>
+            <button onClick={this.onSignUp} className="btn btn-success" style={{margin:'0 0 0 150px'}}>
+              Sign up
             </button>
           </div>
         </div>

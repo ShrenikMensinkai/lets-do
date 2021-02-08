@@ -36,7 +36,7 @@ export default class UserLogin extends Component {
         UserDataService.createUser(data)
           .then(response => {
             console.log(response);
-            alert("Verification Link is sent to your emailid, please verify your email")
+            alert("Verification Link is sent to your email-id, please verify your email")
             this.props.history.push('/login')
           })
           .catch(e => {
