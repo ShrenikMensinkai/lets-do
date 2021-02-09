@@ -22,17 +22,17 @@
                         }
             
             2.  User Registration API:
-                - end point/url: http://localhost:3001/users/registration
-                - method: POST
-                - payload: {
+                    end point/url: http://localhost:3001/users/registration
+                    method: POST
+                    payload: {
                             "invite_id":<valid invite Id>,
                             "password": <minimum 8 character>
                         }
 
             3.  User Login API:
-                - end point/url: http://localhost:3001/users/login
-                - method: POST
-                - payload: {
+                    end point/url: http://localhost:3001/users/login
+                    method: POST
+                    payload: {
                             "email":<valid Email ID>,
                             "password": <minimum 8 character>
                         }
@@ -73,8 +73,11 @@
                     }
 
             5.  Delete Item API:
-                endpoint/url: http://localhost:3001/items/:<valid Item_id>
-                method: DELETE        
+                    endpoint/url: http://localhost:3001/items/:<valid Item_id>
+                    headers:{
+                        token:<valid JWT token>
+                    }
+                    method: DELETE        
         
     
     Loom video links
