@@ -11,7 +11,7 @@ class GetItem{
         try{
             let itemsRepository = new ItemsRepository(); 
             let item = await itemsRepository.getItem({item_id:this.item_id, user_id:this.user_id});
-            if(this.item_id){
+            if(this.item_id && item.length >0){
                 item = item[0];
                 item.id= item._id;
                 delete item._id;
